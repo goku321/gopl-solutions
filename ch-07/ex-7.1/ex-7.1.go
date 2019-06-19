@@ -11,7 +11,6 @@ type WordCounter int
 func (wc *WordCounter) Write(p []byte) (int, error) {
 	scanner := bufio.NewScanner(strings.NewReader(string(p)))
 
-	// Set the split function for scanning operation
 	scanner.Split(bufio.ScanWords)
 
 	*wc = WordCounter(0)
@@ -43,9 +42,10 @@ func main() {
 	const inputString = `A Line was made
 	using multiple words
 	spanned across multiple lines
-	.`
+	. like
+	this.`
 	fmt.Fprintf(&wc, inputString)
 	fmt.Fprintf(&lc, inputString)
 
-	fmt.Println(lc)
+	fmt.Println(wc, lc)
 }
