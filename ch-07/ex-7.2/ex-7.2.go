@@ -1,3 +1,6 @@
+/* Implement a function CountingWriter with io.Writer as
+argument and returns a new Writer */
+
 package main
 
 import (
