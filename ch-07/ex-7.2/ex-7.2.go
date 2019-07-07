@@ -29,4 +29,6 @@ func main() {
 	writer, count := CountingWriter(os.Stdout)
 	fmt.Fprint(writer, "Psychotic\n")
 	fmt.Println(*count)
+	fmt.Fprint(writer, "Psychoanalyst\n")
+	fmt.Println(*count)
 }
