@@ -7,7 +7,9 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
+	"strings"
 )
 
 func wordFreq(fileName string) (map[string]int, error) {
@@ -17,12 +19,22 @@ func wordFreq(fileName string) (map[string]int, error) {
 	}
 	fileReader := bufio.NewScanner(f)
 	fileReader.Split(bufio.ScanWords)
+	freq := make(map[string]int, 0)
 	for fileReader.Scan() {
-		fmt.Println(fileReader.Text())
+		if fileReader.Err() != nil {
+			return freq, fileReader.Err()
+		}
+		freq[strings.ToLower(fileReader.Text())]++
 	}
-	return nil, nil
+	return freq, nil
 }
 
 func main() {
-	wordFreq("words.txt")
+	freq, err := wordFreq("words.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	for k, v := range freq {
+		fmt.Printf("%s occurs %d times\n", k, v)
+	}
 }
